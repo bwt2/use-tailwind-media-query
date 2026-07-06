@@ -2,28 +2,22 @@
 
 React 19 hooks for Tailwind-style breakpoints and arbitrary media queries.
 
-## Motivation 
+<table align="center">
+  <tr>
+    <td align="center">
+      <img src="docs/desktop-view.png" alt="Desktop adaptive view" height="320" />
+      <div><strong>Desktop view</strong></div>
+    </td>
+    <td align="center">
+      <img src="docs/mobile-view.png" alt="Mobile adaptive view" height="320" />
+      <div><strong>Mobile view</strong></div>
+    </td>
+  </tr>
+</table>
 
-### Adaptive design
-
-
-This hook is intended to be used in adaptive designs in React.
-
-Use adaptive design when layouts should change across breakpoints (for example: dashboards, dense data views, and flows on desktop vs mobile). Prefer plain responsive design when the same hierarchy still works and only spacing,
-columns, or typography need to change.
-
-### Store
-
-The hooks share a small media-query store so repeated breakpoint checks can reuse the
-same underlying subscription instead of attaching duplicate `matchMedia` listeners in
-every component. 
-
-Multiple components on the same screen can listen to the
-same media query without duplicating listeners and wasting memory.
-
-## Demo
-
-Live demo: https://bwt2.github.io/useTailwindMediaQuery/
+<div align="center">
+  <a href="https://bwt2.github.io/use-tailwind-media-query">Live demo</a>
+</div>
 
 ## Installation
 
@@ -88,19 +82,6 @@ export function Example() {
   return isMobile ? <MobileView /> : <DesktopView />
 }
 ```
-
-<table align="center">
-  <tr>
-    <td align="center">
-      <img src="docs/desktop-view.png" alt="Desktop adaptive view" height="320" />
-      <div><strong>Desktop view</strong></div>
-    </td>
-    <td align="center">
-      <img src="docs/mobile-view.png" alt="Mobile adaptive view" height="320" />
-      <div><strong>Mobile view</strong></div>
-    </td>
-  </tr>
-</table>
 
 `useTailwindBreakpoint`:
 
@@ -193,6 +174,26 @@ specific differences for layout or secondary UI.
 Current limitation: `useMediaQuery` depends on `MediaQueryList.addEventListener` /
 `removeEventListener`. Older Safari/WebView environments that only implement
 `addListener` / `removeListener` are not supported.
+
+
+## Motivation 
+
+### Adaptive design
+
+
+This hook is intended to be used in adaptive designs in React.
+
+Use adaptive design when layouts should change across breakpoints (for example: dashboards, dense data views, and flows on desktop vs mobile). Prefer plain responsive design when the same hierarchy still works and only spacing,
+columns, or typography need to change.
+
+### Store
+
+The hooks share a small media-query store so repeated breakpoint checks can reuse the
+same underlying subscription instead of attaching duplicate `matchMedia` listeners in
+every component. 
+
+Multiple components on the same screen can listen to the
+same media query without duplicating listeners and wasting memory.
 
 ## Development
 Using pnpm.
