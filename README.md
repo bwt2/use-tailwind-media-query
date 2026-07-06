@@ -1,4 +1,4 @@
-# useTailwindMediaQuery
+# use-tailwind-media-query
 
 React hooks for Tailwind-style breakpoints and arbitrary media queries.
 
@@ -24,16 +24,16 @@ same media query without duplicating listeners and wasting memory.
 ## Installation
 
 ```bash
-npm i @btja/useTailwindMediaQuery
+npm i @btja/use-tailwind-media-query
 ```
 ```bash
-yarn add @btja/useTailwindMediaQuery
+yarn add @btja/use-tailwind-media-query
 ```
 ```bash
-pnpm add @btja/useTailwindMediaQuery
+pnpm add @btja/use-tailwind-media-query
 ```
 ```bash
-bun add @btja/useTailwindMediaQuery
+bun add @btja/use-tailwind-media-query
 ```
 
 ## API
@@ -46,8 +46,8 @@ import {
   useIsMobile,
   useIsTablet,
   useMediaQuery,
-} from '@btja/useTailwindMediaQuery'
-import type { TailwindBreakpoint } from '@btja/useTailwindMediaQuery'
+} from '@btja/use-tailwind-media-query'
+import type { TailwindBreakpoint } from '@btja/use-tailwind-media-query'
 ```
 
 Built-in tailwind breakpoints (`TailwindBreakpoint`):
@@ -76,7 +76,7 @@ Hooks:
 `useIsMobile` (`useIsTablet`, `useIsDesktop`, `useIsLargeDesktop`):
 
 ```tsx
-import { useIsMobile } from '@btja/useTailwindMediaQuery'
+import { useIsMobile } from '@btja/use-tailwind-media-query'
 
 export function Example() {
   const isMobile = useIsMobile()
@@ -101,7 +101,7 @@ export function Example() {
 `useTailwindBreakpoint`:
 
 ```tsx
-import { useTailwindBreakpoint } from '@btja/useTailwindMediaQuery'
+import { useTailwindBreakpoint } from '@btja/use-tailwind-media-query'
 
 export function SidebarLayout() {
   const showSidebar = useTailwindBreakpoint('lg')
@@ -113,7 +113,7 @@ export function SidebarLayout() {
 `useMediaQuery`:
 
 ```tsx
-import { useMediaQuery } from '@btja/useTailwindMediaQuery'
+import { useMediaQuery } from '@btja/use-tailwind-media-query'
 
 export function MotionPreference() {
   const prefersReducedMotion = useMediaQuery('(prefers-reduced-motion: reduce)')

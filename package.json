@@ -1,17 +1,17 @@
 {
-  "name": "@btja/useTailwindMediaQuery",
+  "name": "@btja/use-tailwind-media-query",
   "type": "module",
   "version": "0.1.0",
   "description": "Helper react hook to listen for tailwind media breakpoints. Intended for use with adaptive design.",
   "author": "Brian W Tjahjadi <brian.w.tjahjadi@gmail.com>",
   "license": "MIT",
-  "homepage": "https://github.com/bwt2/useTailwindMediaQuery#readme",
+  "homepage": "https://github.com/bwt2/use-tailwind-media-query#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/bwt2/useTailwindMediaQuery.git"
+    "url": "git+https://github.com/bwt2/use-tailwind-media-query.git"
   },
   "bugs": {
-    "url": "https://github.com/bwt2/useTailwindMediaQuery/issues"
+    "url": "https://github.com/bwt2/use-tailwind-media-query/issues"
   },
   "files": [
     "dist"
