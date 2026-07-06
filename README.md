@@ -125,9 +125,8 @@ export function MotionPreference() {
 
 ## SEO and SSR
 
-If possible, keep both screen variants semantically equivalent. Adaptive design should
-usually change layout and density, not core content. That is safer for SEO, accessibility,
-and consistency.
+If possible, keep both screen variants semantically equivalent for SEO, accessibility,
+and consistency purposes.
 
 With this library, server render does not know the real viewport:
 
@@ -158,8 +157,14 @@ Current limitation: `useMediaQuery` depends on `MediaQueryList.addEventListener`
 ## Development
 Using pnpm.
 
+Setup:
 ```bash
+npx skills add rolldown/tsdown # add tsdown agent skills
 pnpm install
+```
+
+Useful commands:
+```bash
 pnpm run play # run vite playground
 pnpm run test
 pnpm run typecheck
@@ -173,3 +178,10 @@ pnpm bump:version
 pnpm check:release
 npm publish --access public
 ```
+
+## AI Disclosure
+Codex 5.4 was used to review and sanity-check:
+- tsdown configs using the official [tsdown agent skill](https://tsdown.dev/guide/skills).
+- React hook implementation for any issues.
+
+Codex 5.4 was used to generate mockup UI in '`./playground`' demo.
