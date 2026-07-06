@@ -174,8 +174,9 @@ pnpm run build
 Before releasing (after `npm login`):
 
 ```bash
-pnpm bump:version
 pnpm check:release
+pnpm bump:version
+
 npm publish --access public
 ```
 
