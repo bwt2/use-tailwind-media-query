@@ -64,8 +64,8 @@ Hooks:
 
 | Hook | Returns | Purpose |
 | --- | --- | --- |
-| `useMediaQuery(query: string)` | `bool` | Subscribe to any CSS media query |
-| `useTailwindBreakpoint(tailwindBreakpoint: TailwindBreakpoint)` | `bool` | Tailwind breakpoint helper |
+| `useMediaQuery(query: string, options?)` | `bool` | Subscribe to any CSS media query |
+| `useTailwindBreakpoint(tailwindBreakpoint: TailwindBreakpoint, options?)` | `bool` | Tailwind breakpoint helper |
 | `useIsMobile()` | `bool` | `true` below `md` |
 | `useIsTablet()` | `bool` | `true` from `md` to below `lg` |
 | `useIsDesktop()` | `bool` | `true` at `lg` and above |
@@ -110,6 +110,16 @@ export function SidebarLayout() {
 }
 ```
 
+```tsx
+import { useTailwindBreakpoint } from '@btja/use-tailwind-media-query'
+
+export function SsrSidebarLayout() {
+  const showSidebar = useTailwindBreakpoint('lg', { noWindowDefault: true })
+
+  return showSidebar ? <DesktopLayout /> : <CompactLayout />
+}
+```
+
 `useMediaQuery`:
 
 ```tsx
@@ -122,18 +132,31 @@ export function MotionPreference() {
 }
 ```
 
+```tsx
+import { useMediaQuery } from '@btja/use-tailwind-media-query'
+
+export function SsrDesktopShell() {
+  const isDesktop = useMediaQuery('(min-width: 1024px)', { noWindowDefault: true })
+
+  return isDesktop ? <DesktopShell /> : <MobileShell />
+}
+```
+
 
 ## SEO and SSR
 
 If possible, keep both screen variants semantically equivalent for SEO, accessibility,
 and consistency purposes.
 
-With this library, server render does not know the real viewport:
+With this library, server render does not know the real viewport unless you provide an
+explicit fallback with `noWindowDefault`:
 
 | Hook | Server-render value |
 | --- | --- |
 | `useMediaQuery()` | `false` |
+| `useMediaQuery(query, { noWindowDefault: true })` | `true` |
 | `useTailwindBreakpoint()` | `false` |
+| `useTailwindBreakpoint(breakpoint, { noWindowDefault: true })` | `true` |
 | `useIsMobile()` | `true` |
 | `useIsDesktop()` | `false` |
 
@@ -144,6 +167,19 @@ return useIsMobile() ? <MobileView /> : <DesktopView />
 ```
 
 renders the mobile branch on the server, then hydrates to the real client viewport.
+
+Use `noWindowDefault` when you want the server-rendered branch to default to a known
+assumption before the browser can evaluate `matchMedia`. This is useful when your SSR
+environment already has a strong hint about the likely viewport and you want to reduce
+layout flipping during hydration.
+
+Ways to choose `noWindowDefault` on the server include:
+- infer a mobile/desktop default from the user-agent string
+- use device hints or request headers provided by your framework, CDN, or edge runtime
+- store a prior device preference in a cookie and reuse it during SSR
+- pick a product-level default such as mobile-first when no reliable hint exists
+
+If the server guess is wrong, the client will correct to the real media-query result after hydration (with risk of layout flash).
 
 If SEO matters, avoid putting unique primary content in only one branch. Keep headings,
 copy, links, and other canonical content the same when possible, and reserve screen-
@@ -185,4 +221,7 @@ Codex 5.4 was used to review and sanity-check:
 - tsdown configs using the official [tsdown agent skill](https://tsdown.dev/guide/skills).
 - React hook implementation for any issues.
 
-Codex 5.4 was used to generate mockup UI in '`./playground`' demo.
+Codex 5.4 was used to generate 
+- Mockup UI in '`./playground`' demo
+- JSDoc
+- Tests

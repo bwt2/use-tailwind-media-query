@@ -8,7 +8,11 @@ type MediaQueryStore = {
 
 const stores = new Map<string, MediaQueryStore>();
 
-function createMediaQueryStore(query: string): MediaQueryStore {
+function createMediaQueryStore(
+  query: string,
+  noWindowDefault: boolean = false,
+  storeKey: string = query,
+): MediaQueryStore {
   const media =
     typeof window !== "undefined"
       ? window.matchMedia(query)
@@ -22,11 +26,11 @@ function createMediaQueryStore(query: string): MediaQueryStore {
 
   return {
     getSnapshot() {
-      return media?.matches ?? false;    
+      return media?.matches ?? noWindowDefault;    
     },
 
     getServerSnapshot() {
-      return false;
+      return noWindowDefault;
     },
 
     subscribe(listener) {
@@ -45,26 +49,44 @@ function createMediaQueryStore(query: string): MediaQueryStore {
 
         if (listeners.size === 0) {
           media.removeEventListener("change", notify);
-          stores.delete(query);
+          stores.delete(storeKey);
         }
       };
     },
   };
 }
 
-function getMediaQueryStore(query: string) {
-  let store = stores.get(query);
+function getMediaQueryStore(query: string, noWindowDefault: boolean = false) {
+  if (typeof window === "undefined") {
+    return createMediaQueryStore(query, noWindowDefault);
+  }
+
+  const storeKey = `${query}::${String(noWindowDefault)}`;
+  let store = stores.get(storeKey);
 
   if (!store) {
-    store = createMediaQueryStore(query);
-    stores.set(query, store);
+    store = createMediaQueryStore(query, noWindowDefault, storeKey);
+    stores.set(storeKey, store);
   }
 
   return store;
 }
 
-export function useMediaQuery(query: string): boolean {
-  const store = getMediaQueryStore(query);
+export type UseMediaQueryOptions = {
+  /**
+   * Value returned when `window` is unavailable, such as during server rendering.
+   */
+  noWindowDefault?: boolean;
+};
+
+/**
+ * Subscribes to an arbitrary CSS media query and returns whether it currently matches.
+ */
+export function useMediaQuery(
+  query: string,
+  options: UseMediaQueryOptions = {},
+): boolean {
+  const store = getMediaQueryStore(query, options.noWindowDefault ?? false);
 
   return useSyncExternalStore(
     store.subscribe,

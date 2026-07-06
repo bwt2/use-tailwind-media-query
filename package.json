@@ -37,6 +37,7 @@
     "build": "tsdown",
     "dev": "tsdown --watch",
     "play": "vite",
+    "play:build": "vite build",
     "test": "vitest",
     "typecheck": "tsc --noEmit",
     "pack:dry-run": "npm pack --dry-run",
