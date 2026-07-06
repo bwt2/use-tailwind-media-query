@@ -23,14 +23,8 @@ React 19 hooks for Tailwind-style breakpoints and arbitrary media queries.
 
 ```bash
 npm i @btja/use-tailwind-media-query
-```
-```bash
 yarn add @btja/use-tailwind-media-query
-```
-```bash
 pnpm add @btja/use-tailwind-media-query
-```
-```bash
 bun add @btja/use-tailwind-media-query
 ```
 
@@ -222,11 +216,7 @@ npm publish --access public
 ```
 
 ## AI Disclosure
-Codex 5.4 was used to review and sanity-check:
-- tsdown configs using the official [tsdown agent skill](https://tsdown.dev/guide/skills).
-- React hook implementation for any issues.
-
-Codex 5.4 was used to generate 
+Codex 5.4 was used to review and sanity-check the code. Codex was also used for:
 - Mockup UI in '`./playground`' demo
 - JSDoc
 - Tests

@@ -13,7 +13,10 @@
     "react-hooks",
     "hook",
     "custom-hook",
-    "use-tailwind-media-query"
+    "use-tailwind-media-query",
+    "tailwind-media-query",
+    "tailwind-breakpoints",
+    "adaptive-design"
   ],
   "homepage": "https://github.com/bwt2/use-tailwind-media-query#readme",
   "repository": {
